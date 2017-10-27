@@ -58,6 +58,7 @@ func countNodes(markingGraph:MarkingGraph) -> Int{
 // Ex. 1: Mutual exclusion
 //Construction du graphe de marquage
 do {
+<<<<<<< HEAD
   let m00 = MarkingGraph(marking: ["s0": 1, "s1": 0,"s2": 1,"s3":0,"s4":1])
   let m01 = MarkingGraph(marking: ["s0": 0, "s1": 1,"s2": 0,"s3":0,"s4":1])
   let m02 = MarkingGraph(marking: ["s0": 1, "s1": 0,"s2": 0,"s3":1,"s4":0])
@@ -65,6 +66,15 @@ do {
   m00.successors = ["t1": m01,"t3":m02]
   m01.successors = ["t0": m00]
   m02.successors = ["t2": m00]
+=======
+    let m0 = MarkingGraph(marking: ["s0": 1, "s1": 0, "s2": 1, "s3": 0, "s4": 1])
+    let m1 = MarkingGraph(marking: ["s0": 0, "s1": 1, "s2": 0, "s3": 0, "s4": 1])
+    let m2 = MarkingGraph(marking: ["s0": 1, "s1": 0, "s2": 0, "s3": 1, "s4": 0])
+
+    m0.successors = ["t1": m1, "t3": m2]
+    m1.successors = ["t0": m0]
+    m2.successors = ["t2": m0]
+>>>>>>> 90132b5e5bad46d14f2ad8c5a40be0fe8ce3fbab
 }
 
 
