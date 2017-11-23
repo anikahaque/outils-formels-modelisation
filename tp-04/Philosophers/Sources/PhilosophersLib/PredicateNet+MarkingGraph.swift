@@ -12,8 +12,33 @@ extension PredicateNet {
         //
         // You may use these methods to check if you've already visited a marking, or if the model
         // is unbounded.
+let noeudInitial = PredicateMarkingNode<T>(marking: marking)
 
+var AVisiter:[PredicateMarkingNode<T>] = [noeudInitial]
+
+while(!AVisiter.isEmpty){
+  let actuel = AVisiter.popLast()!
+  for t in transitions{
+    actuel.successors[t] = [:]
+    let binding: [PredicateTransition<T>.Binding] = t.fireableBingings(from: actuel.marking)
+    for b in binding{
+      let marquage = PredicateMarkingNode(marking: t.fire(from: actuel.marking, with:b)!)
+      for ini in noeudInitial{if(PredicateNet.greater(marquage.marking, ini.marking)){
         return nil
+      }}
+    if let kM = noeudInitial.first(where:{PredicateNet.equals($0.marking,marquage.marking)}){
+
+    actuel.successors[t]![b] = kM
+    }
+    else if(!AVisiter.contains(where: { PredicateNet.equals($0.marking, marquage.marking) })) {
+
+    AVisiter.append(marquage)
+    actuel.successors[t]![b] = marquage
+    }
+    }
+  }
+}
+        return noeudInitial
     }
 
     // MARK: Internals
