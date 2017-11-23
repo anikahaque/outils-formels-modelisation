@@ -16,7 +16,7 @@ let noeudInitial = PredicateMarkingNode<T>(marking: marking)
 
 var AVisiter:[PredicateMarkingNode<T>] = [noeudInitial]
 
-while(!AVisiter.isEmpty){
+while(AVisiter.count > 0){
   let actuel = AVisiter.popLast()!
   for t in transitions{
     actuel.successors[t] = [:]
@@ -26,9 +26,9 @@ while(!AVisiter.isEmpty){
       for ini in noeudInitial{if(PredicateNet.greater(marquage.marking, ini.marking)){
         return nil
       }}
-    if let kM = noeudInitial.first(where:{PredicateNet.equals($0.marking,marquage.marking)}){
+    if let marquagevu = noeudInitial.first(where:{PredicateNet.equals($0.marking,marquage.marking)}){
 
-    actuel.successors[t]![b] = kM
+    actuel.successors[t]![b] = marquagevu
     }
     else if(!AVisiter.contains(where: { PredicateNet.equals($0.marking, marquage.marking) })) {
 
