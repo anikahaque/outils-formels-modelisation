@@ -1,19 +1,72 @@
-public class MarkingGraph {
+public class MarkingGraph//classe noeud {
 
     public typealias Marking = [String: Int]
 
-    public let marking   : Marking
-    public var successors: [String: MarkingGraph]
+    public let marking   : Marking //marquage que noeud
+    public var successors: [String: MarkingGraph]//arc sortant du noeud
 
     public init(marking: Marking, successors: [String: MarkingGraph] = [:]) {
         self.marking    = marking
         self.successors = successors
     }
-
+//static func==(this:MarkingGraph).... méthode équitable qui permet de comparer des graphes de marquages
 }
 
+
+//Parcours en profondeur:nombre de noeud
+func countNodes(markingGraph:MarkingGraph) -> Int{
+
+  var seen =[markingGraph]
+  var toVisit=[markingGraph]
+
+
+  while let current = toVisit.popLast(){//tant que j'ai des noeud à visiter{
+  for(_,successor)in markingGraph.successors{
+    if seen.contains(where:{$0 == successor}){
+      seen.append(successor)//vu
+      toVisit.append(successor)
+    if marking.first(where:( $0.1>1)) != nil){return true
+      }
+    }
+    }
+
+  }
+
+    return seen.count
+  }
+
+  func countNodesRec(markingGraph:MarkingGraph,seen:inout[markingGraph]) -> Int{
+
+  seen.append(markingGraph)
+
+
+
+    while let current = toVisit.popLast()//tant que j'ai des noeud à visiter{
+    for(_,successor)in markingGraph.successors{
+      if seen.contains(where:{$0 == successor}){
+        seen.append(successor)//vu
+        _=countNodes(markingGraph:successor,seen:&seen)
+
+      }
+
+    }
+
+
+  return seen.count
+}}
+
 // Ex. 1: Mutual exclusion
+//Construction du graphe de marquage
 do {
+<<<<<<< HEAD
+  let m00 = MarkingGraph(marking: ["s0": 1, "s1": 0,"s2": 1,"s3":0,"s4":1])
+  let m01 = MarkingGraph(marking: ["s0": 0, "s1": 1,"s2": 0,"s3":0,"s4":1])
+  let m02 = MarkingGraph(marking: ["s0": 1, "s1": 0,"s2": 0,"s3":1,"s4":0])
+
+  m00.successors = ["t1": m01,"t3":m02]
+  m01.successors = ["t0": m00]
+  m02.successors = ["t2": m00]
+=======
     let m0 = MarkingGraph(marking: ["s0": 1, "s1": 0, "s2": 1, "s3": 0, "s4": 1])
     let m1 = MarkingGraph(marking: ["s0": 0, "s1": 1, "s2": 0, "s3": 0, "s4": 1])
     let m2 = MarkingGraph(marking: ["s0": 1, "s1": 0, "s2": 0, "s3": 1, "s4": 0])
@@ -21,9 +74,12 @@ do {
     m0.successors = ["t1": m1, "t3": m2]
     m1.successors = ["t0": m0]
     m2.successors = ["t2": m0]
+>>>>>>> 90132b5e5bad46d14f2ad8c5a40be0fe8ce3fbab
 }
 
-// Ex. 2: PetriNet 1
+
+
+// Ex. 2: PetriNet 1 vivant pas de blocage
 do {
     let m0 = MarkingGraph(marking: ["p0": 2, "p1": 0])
     let m1 = MarkingGraph(marking: ["p0": 1, "p1": 1])
@@ -33,7 +89,9 @@ do {
     m1.successors = ["t0": m2, "t1": m0]
     m2.successors = ["t1": m1]
 
-    // Write your code here ...
+//
+
+
 }
 
 // Ex. 2: PetriNet 2
