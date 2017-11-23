@@ -51,23 +51,34 @@ do {
     }
 }
 //Question 1
-do{
+do
+{
   let philosophers = lockFreePhilosophers(n: 5)
+
   let markgra = philosophers.markingGraph(from: philosophers.initialMarking!)
+
   print("Question 1 \(markgra!.count)")
 }
+
 //question2
-do{
+do
+{
   let philosophers = lockablePhilosophers(n: 5)
+
   let markgrap = philosophers.markingGraph(from: philosophers.initialMarking!)
+
   print("Question 2 \(markgrap!.count)")
 }
-//Question 3
+
 do {
 
   let philosophers = lockablePhilosophers(n: 5)
+
   let markgrap = philosophers.markingGraph(from: philosophers.initialMarking!)
-  for mg in markgra! {
+
+  for mg in markgra!
+  {
+
     print("Question 3 \(mg.marking)")
   }
 }
