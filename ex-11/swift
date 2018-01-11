@@ -1,0 +1,24 @@
+
+
+
+
+enum People{
+case marc,michel,aline
+
+}
+let etudiants:Set<People>=[.marc,.michel,.aline]
+func isEtudiant(people: People) -> bool{
+  switch People{
+  case .marc: return true
+  default: return false
+  }
+}
+func isWoman(people: People) -> bool{
+  switch People{
+  case .aline: return true
+
+  default: return false
+  }
+}
+
+print(people.contains(where:{isEtudiant(people:$0) && !isWoman(people: $0)}))
